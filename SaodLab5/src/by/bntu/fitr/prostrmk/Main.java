@@ -7,8 +7,9 @@ public class Main {
     public static void main(String[] args) {
 
         CustomArray array = new CustomArray(6);
+        System.out.println(array);
+        System.out.println(array.getMaxMultiple());
 
-        System.out.println(array.dataComparison());
 
     }
 }

@@ -1,6 +1,5 @@
 package by.bntu.fitr.prostrmk;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class CustomArray {
@@ -24,11 +23,9 @@ public class CustomArray {
         for (int i : mas) {
             comparisonCount++;
             if (i == value) {
-//                System.out.println(value + " is in array. Count of comparison: " + comparisonCount);
                 return comparisonCount;
             }
         }
-//        System.out.println(value + "is not in array. Count of comparison: " + comparisonCount);
         return -1;
     }
 
@@ -36,30 +33,30 @@ public class CustomArray {
         return array;
     }
 
-    public int binarySearch(int value, int []mas) {
-        int position;
-        int first = 0;
-        int last = mas.length;
-        int comparisonCount = 1;
-
-        position = last / 2;
-        System.out.println(position);
-
-        while ((mas[position] != value) && (first <= last)) {
-            comparisonCount++;
-            if (mas[position] > value) {
-                last = position - 1;
+    public int binarySearch(int x, int []mas) {
+        int newMas[] = new int[mas.length];
+        System.arraycopy(mas, 0, newMas, 0, mas.length);
+        sort(newMas);
+        int i = -1;
+        int count = 0;
+        int low = 0, high = newMas.length, mid;
+        while (low < high) {
+            count++;
+            mid = (low + high)/2;
+            if (x == newMas[mid]) {
+                i = mid;
+                break;
             } else {
-                first = position + 1;
+                if (x < newMas[mid]) {
+                    high = mid;
+                } else {
+                    low = mid + 1;
+                }
             }
-            position = (first + last) / 2;
         }
-        if (first <= last) {
-            return comparisonCount;
-        } else {
-            return -1;
-        }
+        return count;
     }
+
 
     public int sort(int []mas) {
         int countOfTransposition = 0;
@@ -72,7 +69,7 @@ public class CustomArray {
             }
 
         }
-//        System.out.println("Array was changed " + countOfTransposition + " times");
+
         return countOfTransposition;
     }
 
@@ -87,9 +84,7 @@ public class CustomArray {
             temp = new int[length];
             randomFilling(temp);
             sb.append(linearSearch(temp[5], temp)).append(" - linear search(").append(temp.length).append(" elements)\n");
-//            System.out.println(Arrays.toString(temp));
-            sb.append(binarySearch(temp[temp.length / 4], temp)).append( " - binary search(").append(temp.length).append(" elements)\n");
-//            System.out.println(length);
+            sb.append(binarySearch(temp[0], temp)).append( " - binary search(").append(temp.length).append(" elements)\n");
             sb.append(sort(temp)).append(" - sort(").append(temp.length).append(" elements)\n\n");
         }
         return sb.toString();
@@ -101,6 +96,25 @@ public class CustomArray {
         for (int i = 0; i < emptyArray.length; i++) {
             emptyArray[i] = random.nextInt(200) - 100;
         }
+    }
+
+    public int getMaxMultiple(){
+        int max = firstMultiple();
+        for (int i : array) {
+            if (i > max && i % 2 == 0){
+                max = i;
+            }
+        }
+        return max;
+    }
+
+    private int firstMultiple(){
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] % 2 == 0){
+                return array[i];
+            }
+        }
+        return -101;
     }
 
     @Override
