@@ -6,13 +6,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        var graph = new Graph();
-        graph.addTop("1");
-        graph.addTop("2");
-        graph.addTop("3");
-        graph.addTop("4");
-        graph.addTop("5");
-        graph.detour(0);
+        CustomArray array = new CustomArray(1,2,3,4,5,6);
+        array.binarySearch(4);
+        System.out.println(array.linearSearch(4));
 
 
     }
