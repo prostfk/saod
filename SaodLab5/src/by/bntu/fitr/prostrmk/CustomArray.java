@@ -68,20 +68,19 @@ public class CustomArray {
         sort(newMas);
         var countOfComparison = 0;
         int indexOfKeyLast = 0;
-        int indexOfKeyFirst;
+        int indexOfKeyFirst = 0;
         while (indexOfKeyLast < indexTable.length) {
-            if (element < newMas[indexTable[indexOfKeyLast]]) {
-                countOfComparison++;
+            System.out.println(indexOfKeyLast);
+            countOfComparison++;
+            if (element < newMas[indexTable[indexOfKeyLast]] && element > newMas[indexTable[indexOfKeyFirst]]) {
                 break;
             }
             indexOfKeyLast++;
+            indexOfKeyFirst = indexOfKeyLast - 1;
         }
-//        for (indexOfKeyLast = 0; indexOfKeyLast < indexTable.length; indexOfKeyLast++) {
-//            if (element < newMas[indexTable[indexOfKeyLast]]) {
-//                countOfComparison++;
-//                break;
-//            }
-//        }
+
+
+
         if (indexOfKeyLast == indexTable.length) {
             indexOfKeyLast -= 2;
         }
@@ -90,7 +89,6 @@ public class CustomArray {
             indexOfKeyLast = indexTable[1];
         } else {
             indexOfKeyFirst = indexTable[indexOfKeyLast - 1];
-//            System.out.println(Arrays.toString(indexTable));
             indexOfKeyLast = indexTable[indexOfKeyLast];
         }
         countOfComparison += 2;
@@ -101,6 +99,7 @@ public class CustomArray {
         }
         return -1;
     }
+
 
 
     public int sort(int[] mas) {
@@ -131,7 +130,7 @@ public class CustomArray {
             sb.append("__________________________________________________________________________________________________________________\n");
             sb.append(binarySearch(temp[0], temp)).append(" comparison count in binary search(").append(temp.length).append(" elements)\n");
             sb.append(linearSearch(temp[5], temp)).append(" comparison count in linear search(").append(temp.length).append(" elements)\n");
-            sb.append(indexSequentialSearch(temp[7], temp)).append(" comparison count in index sequential search(").append(temp.length).append(" elements)\n");
+            sb.append(indexSequentialSearch(temp[6], temp)).append(" comparison count in index sequential search(").append(temp.length).append(" elements)\n");
             sb.append(sort(temp)).append(" - sort(").append(temp.length).append(" elements)\n\n");
             sb.append("__________________________________________________________________________________________________________________\n");
 
@@ -167,10 +166,10 @@ public class CustomArray {
     }
 
     private void initIndexTable() {
-        this.indexTable = new int[(int) Math.ceil(array.length / 5)];
-        int index = 0;
-        for (int i = 0; i < array.length; i += 5) {
-            indexTable[index++] = i;
+        this.indexTable = new int[(array.length / 5) + 1];
+        int index;int i;
+        for (i = 0, index = 0; i < array.length; i += 5, index++) {
+            indexTable[index] = i;
         }
     }
 
